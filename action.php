@@ -7,21 +7,20 @@ if (!isset($_SESSION)) {
 function getPost($category)
 {
     global $conn; // делаем переменную $conn глобальной
-    //$arr_out = array();
     try {
-        if (!$result = $conn->query("SELECT * FROM NewsAgency JOIN users ON NewsAgency.user_id=Users.user_id WHERE category='" . $category . "'")) // выбор $count записей из БД, отсортированных так, что самая последняя отправленная запись будет всегда первой.
+        if (!$result = $conn->query("SELECT * FROM NewsAgency JOIN users ON NewsAgency.user_id=Users.user_id WHERE category='" . $category . "' ORDER BY date DESC")) // выбор $count записей из БД, отсортированных так, что самая последняя отправленная запись будет всегда первой.
         {
             throw new Exception('Ошибка создания таблицы: [' . $conn->error . ']');
         }
-        $row = $result->fetch_assoc();
-        // while ($row = $result->fetch_assoc()) // каждую запись отправляем в массив.
-        // {
-        //     $arr_out[] = $row;
-        // }
+        //$row = $result->fetch_assoc();
+        while ($row = $result->fetch_assoc()) // каждую запись отправляем в массив.
+        {
+            $arr_out[] = $row;
+        }
     } catch (Exception $e) {
         echo $e->getMessage();
     }
-    return $row;
+    return $arr_out;
 }
 
 function getCategories()
