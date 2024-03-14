@@ -1,6 +1,7 @@
 <?php
 include "header.php";
 include_once "action.php";
+ob_start();
 ?>
 <div id="contact" class="contact-us section">
     <div class="container">
@@ -34,10 +35,11 @@ include_once "action.php";
 if (isset($_POST['go'])) {
     if (check_autorize($_POST['login'], $_POST['pas'])) {
         header("Location: admin_panel.php");
+        ob_end_flush();
     } else {
         include "header.php";
-
         echo "Неправильне введення, спробуйте ще раз <br>";
+        ob_end_flush();
     }
 }?>
         </div>

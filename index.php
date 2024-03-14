@@ -89,11 +89,7 @@ $out = out($pageno, $page_size, $start);
 //print_r($out);
 if (count($out) > 0) {
     foreach ($out as $row) {
-
         ?>
-
-
-
 <div class="item">
               <h4><?php echo $row['article']; ?></h4>
                 <h8>Автор публікації: <?php echo $row['log'] ?></h8><div>
@@ -114,7 +110,9 @@ if (count($out) > 0) {
       </div>
     </div>
   </div>
-
+<?php
+if ($rows > $page_size) {
+?>
   <nav aria-label="...">
   <ul class="pagination justify-content-center">
     <li  class="page-item <?php if ($pageno <= 1) {echo "disabled";}?>" >
@@ -140,5 +138,5 @@ if (!isset($_GET["pageno"])) {echo "index.php?pageno=2";} elseif ($_GET['pageno'
 </nav>
 <hr>
 <?php
-
+}
 include "footer.php";

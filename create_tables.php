@@ -31,8 +31,9 @@ try {
 
     if (!$conn->query("ALTER TABLE NewsAgency ADD FOREIGN KEY (category) REFERENCES Categories (category) ON DELETE RESTRICT ON UPDATE CASCADE")) {
         throw new Exception('Ошибка создания таблицы NewsAgency: [' . $conn->error . ']');
-    }
 
+    }
+    
     // INSERT INTO `newsagency` (`id`, `username`, `date`, `message`) VALUES (NULL, 'admin', NULL, 'hello');
     echo " Users, Categories and NewsAgency tables created successfully";
     $conn->close();
